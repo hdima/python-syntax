@@ -493,8 +493,8 @@ if version >= 508 || !exists("did_python_syn_inits")
 
   HiLink pythonComment          Comment
   if !s:Enabled("g:python_highlight_file_headers_as_comments")
-    HiLink pythonCoding           Special
-    HiLink pythonRun              Special
+    HiLink pythonCoding           SpecialComment
+    HiLink pythonRun              SpecialComment
   endif
   HiLink pythonTodo             Todo
 
