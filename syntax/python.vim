@@ -157,6 +157,7 @@ syn keyword pythonConditional   if elif else
 syn keyword pythonImport        import
 syn keyword pythonException     try except finally
 syn keyword pythonOperator      and in is not or
+syn keyword pythonSelf          self
 
 syn match pythonStatement   "\<yield\>" display
 syn match pythonImport      "\<from\>" display
@@ -486,6 +487,7 @@ if version >= 508 || !exists("did_python_syn_inits")
   HiLink pythonRepeat           Repeat
   HiLink pythonException        Exception
   HiLink pythonOperator         Operator
+  HiLink pythonSelf             Special
 
   HiLink pythonDecorator        Define
   HiLink pythonDottedName       Function
