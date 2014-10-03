@@ -197,7 +197,7 @@ syn keyword pythonTodo		TODO FIXME XXX contained
 " Classes
 "
 
-syn match pythonClass       "\(import \)\@<!\<[A-Z][a-zA-Z]*" display
+syn match pythonClass       "\(import \)\@<!\<[A-Z][a-zA-Z]*\>" display
 
 "
 " Errors
