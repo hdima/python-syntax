@@ -91,7 +91,12 @@ syn match   pythonDecorator	"@" display nextgroup=pythonFunction skipwhite
 syn match   pythonFunction
       \ "\%(\%(def\s\|class\s\|@\)\s*\)\@<=\h\%(\w\|\.\)*" contained
 
+" Add spelling to comments with some exceptions
 syn match   pythonComment	"#.*$" contains=pythonTodo,@Spell
+" Skip for PyLint's in-line comment rules
+syn match   pythonComment	"# pylint:.*$" display contains=@NoSpell
+" Skip noqa inline comments
+syn match   pythonComment	"# noqa.*$" display contains=@NoSpell
 syn keyword pythonTodo		FIXME NOTE NOTES TODO XXX contained
 
 " Triple-quoted strings can contain doctests.
