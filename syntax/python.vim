@@ -31,6 +31,8 @@
 "   let python_no_exception_highlight = 1
 "   let python_no_number_highlight = 1
 "   let python_space_error_highlight = 1
+"   let python_shebang_header_highlight = 1
+"   let python_coding_header_highlight = 1
 "
 " All the options above can be switched on together.
 "
@@ -94,9 +96,9 @@ syn match   pythonFunction
 " Add spelling to comments with some exceptions
 syn match   pythonComment	"#.*$" contains=pythonTodo,@Spell
 " Skip for PyLint's in-line comment rules
-syn match   pythonComment	"# pylint:.*$" display contains=@NoSpell
+syn match   pythonComment	"# pylint:.*$" contains=@NoSpell
 " Skip noqa inline comments
-syn match   pythonComment	"# noqa.*$" display contains=@NoSpell
+syn match   pythonComment	"# noqa.*$" contains=@NoSpell
 syn keyword pythonTodo		FIXME NOTE NOTES TODO XXX contained
 
 " Triple-quoted strings can contain doctests.
@@ -138,6 +140,8 @@ if exists("python_highlight_all")
     unlet python_no_number_highlight
   endif
   let python_space_error_highlight = 1
+  let python_shebang_header_highlight = 1
+  let python_coding_header_highlight = 1
 endif
 
 " It is very important to understand all details before changing the
@@ -237,6 +241,14 @@ if exists("python_space_error_highlight")
   syn match   pythonSpaceError	display "\t\+ "
 endif
 
+if exists("python_shebang_header_highlight")
+  syn match pythonRun "\%^#!.*$" contains=@NoSpell
+endif
+
+if exists("python_coding_header_highlight")
+  syn match pythonCoding "\%^.*\%(\n.*\)\?#.*coding[:=]\s*[0-9A-Za-z-_.]\+.*$" contains=@NoSpell
+endif
+
 " Do not spell doctests inside strings.
 " Notice that the end of a string, either ''', or """, will end the contained
 " doctest too.  Thus, we do *not* need to have it as an end pattern.
@@ -276,6 +288,12 @@ if version >= 508 || !exists("did_python_syn_inits")
   HiLink pythonDecorator	Define
   HiLink pythonFunction		Function
   HiLink pythonComment		Comment
+  if exists("python_shebang_header_highlight")
+    HiLink pythonRun		Special
+  endif
+  if exists("python_coding_header_highlight")
+    HiLink pythonCoding		Special
+  endif
   HiLink pythonTodo		Todo
   HiLink pythonString		String
   HiLink pythonRawString	String
