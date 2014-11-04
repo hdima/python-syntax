@@ -187,6 +187,7 @@ syn match   pythonDot        "\." display containedin=pythonDottedName
 "
 
 syn match   pythonComment	"#.*$" display contains=pythonTodo,@Spell
+syn match   pythonComment	"# pylint:.*$" display contains=pythonTodo,@NoSpell   " Don't spell pylint's comments
 if !s:Enabled("g:python_highlight_file_headers_as_comments")
   syn match   pythonRun		"\%^#!.*$"
   syn match   pythonCoding	"\%^.*\%(\n.*\)\?#.*coding[:=]\s*[0-9A-Za-z-_.]\+.*$"
