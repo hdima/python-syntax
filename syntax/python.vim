@@ -30,6 +30,9 @@
 "   let python_no_doctest_highlight = 1
 "   let python_no_exception_highlight = 1
 "   let python_no_number_highlight = 1
+"   let python_no_string_format_highlight = 1
+"   let python_no_string_formatting_highlight = 1
+"   let python_no_string_template_highlight = 1
 "   let python_space_error_highlight = 1
 "   let python_shebang_header_highlight = 1
 "   let python_coding_header_highlight = 1
@@ -51,6 +54,36 @@ endif
 " Original setting will be restored.
 let s:cpo_save = &cpo
 set cpo&vim
+
+if exists("python_highlight_all")
+  if exists("python_no_builtin_highlight")
+    unlet python_no_builtin_highlight
+  endif
+  if exists("python_no_doctest_code_highlight")
+    unlet python_no_doctest_code_highlight
+  endif
+  if exists("python_no_doctest_highlight")
+    unlet python_no_doctest_highlight
+  endif
+  if exists("python_no_exception_highlight")
+    unlet python_no_exception_highlight
+  endif
+  if exists("python_no_number_highlight")
+    unlet python_no_number_highlight
+  endif
+  if exists("python_no_string_format_highlight")
+    unlet python_no_string_format_highlight
+  endif
+  if exists("python_no_string_formatting_highlight")
+    unlet python_no_string_formatting_highlight
+  endif
+  if exists("python_no_string_template_highlight")
+    unlet python_no_string_template_highlight
+  endif
+  let python_space_error_highlight = 1
+  let python_shebang_header_highlight = 1
+  let python_coding_header_highlight = 1
+endif
 
 " Keep Python keywords in alphabetical order inside groups for easy
 " comparison with the table in the 'Python Language Reference'
@@ -123,25 +156,21 @@ syn match   pythonEscape	"\%(\\u\x\{4}\|\\U\x\{8}\)" contained
 syn match   pythonEscape	"\\N{.\{-}}" contained
 syn match   pythonEscape	"\\$"
 
-if exists("python_highlight_all")
-  if exists("python_no_builtin_highlight")
-    unlet python_no_builtin_highlight
-  endif
-  if exists("python_no_doctest_code_highlight")
-    unlet python_no_doctest_code_highlight
-  endif
-  if exists("python_no_doctest_highlight")
-    unlet python_no_doctest_highlight
-  endif
-  if exists("python_no_exception_highlight")
-    unlet python_no_exception_highlight
-  endif
-  if exists("python_no_number_highlight")
-    unlet python_no_number_highlight
-  endif
-  let python_space_error_highlight = 1
-  let python_shebang_header_highlight = 1
-  let python_coding_header_highlight = 1
+
+if !exists("python_no_string_format_highlight")
+  syn match pythonStrFormat "{{\|}}" contained containedin=pythonString,pythonRawString
+  syn match pythonStrFormat "{\%(\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*\|\d\+\)\=\%(\.\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*\|\[\%(\d\+\|[^!:\}]\+\)\]\)*\%(![rsa]\)\=\%(:\%({\%(\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*\|\d\+\)}\|\%([^}]\=[<>=^]\)\=[ +-]\=#\=0\=\d*,\=\%(\.\d\+\)\=[bcdeEfFgGnosxX%]\=\)\=\)\=}" contained containedin=pythonString,pythonRawString
+endif
+
+if !exists("python_no_string_formatting_highlight")
+  syn match pythonStrFormatting "%\%(([^)]\+)\)\=[-#0 +]*\d*\%(\.\d\+\)\=[hlL]\=[diouxXeEfFgGcrs%]" contained containedin=pythonString,pythonRawString
+  syn match pythonStrFormatting "%[-#0 +]*\%(\*\|\d\+\)\=\%(\.\%(\*\|\d\+\)\)\=[hlL]\=[diouxXeEfFgGcrs%]" contained containedin=pythonString,pythonRawString
+endif
+
+if !exists("python_no_string_template_highlight")
+  syn match pythonStrTemplate "\$\$" contained containedin=pythonString,pythonRawString
+  syn match pythonStrTemplate "\${[a-zA-Z_][a-zA-Z0-9_]*}" contained containedin=pythonString,pythonRawString
+  syn match pythonStrTemplate "\$[a-zA-Z_][a-zA-Z0-9_]*" contained containedin=pythonString,pythonRawString
 endif
 
 " It is very important to understand all details before changing the
@@ -297,6 +326,15 @@ if version >= 508 || !exists("did_python_syn_inits")
   HiLink pythonTodo		Todo
   HiLink pythonString		String
   HiLink pythonRawString	String
+  if !exists("python_no_string_format_highlight")
+    HiLink pythonStrFormat	Special
+  endif
+  if !exists("python_no_string_formatting_highlight")
+    HiLink pythonStrFormatting	Special
+  endif
+  if !exists("python_no_string_template_highlight")
+    HiLink pythonStrTemplate	Special
+  endif
   HiLink pythonEscape		Special
   if !exists("python_no_number_highlight")
     HiLink pythonNumber		Number
