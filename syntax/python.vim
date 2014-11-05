@@ -26,6 +26,7 @@
 " Optional highlighting can be controlled using these variables.
 "
 "   let python_no_builtin_highlight = 1
+"   let python_no_self_highlight = 1
 "   let python_no_doctest_code_highlight = 1
 "   let python_no_doctest_highlight = 1
 "   let python_no_exception_highlight = 1
@@ -58,6 +59,9 @@ set cpo&vim
 if exists("python_highlight_all")
   if exists("python_no_builtin_highlight")
     unlet python_no_builtin_highlight
+  endif
+  if exists("python_no_self_highlight")
+    unlet python_no_self_highlight
   endif
   if exists("python_no_doctest_code_highlight")
     unlet python_no_doctest_code_highlight
@@ -115,6 +119,9 @@ syn keyword pythonRepeat	for while
 syn keyword pythonOperator	and in is not or
 syn keyword pythonException	except finally raise try
 syn keyword pythonInclude	from import
+if !exists("python_no_self_highlight")
+  syn keyword pythonSelf	self cls
+endif
 
 " Decorators (new in Python 2.4)
 syn match   pythonDecorator	"@" display nextgroup=pythonFunction skipwhite
@@ -341,6 +348,9 @@ if version >= 508 || !exists("did_python_syn_inits")
   endif
   if !exists("python_no_builtin_highlight")
     HiLink pythonBuiltin	Function
+  endif
+  if !exists("python_no_self_highlight")
+    HiLink pythonSelf		Identifier
   endif
   if !exists("python_no_exception_highlight")
     HiLink pythonExceptions	Structure
