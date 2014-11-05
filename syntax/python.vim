@@ -34,6 +34,9 @@
 "   let python_no_string_format_highlight = 1
 "   let python_no_string_formatting_highlight = 1
 "   let python_no_string_template_highlight = 1
+"   let python_no_extra_operators_highlight = 1
+"   let python_no_stars_operators_highlight = 1
+"   let python_no_equal_sign_operator_highlight = 1
 "   let python_space_error_highlight = 1
 "   let python_shebang_header_highlight = 1
 "   let python_coding_header_highlight = 1
@@ -84,6 +87,15 @@ if exists("python_highlight_all")
   if exists("python_no_string_template_highlight")
     unlet python_no_string_template_highlight
   endif
+  if exists("python_no_extra_operators_highlight")
+    unlet python_no_extra_operators_highlight
+  endif
+  if exists("python_no_stars_operators_highlight")
+    unlet python_no_stars_operators_highlight
+  endif
+  if exists("python_no_equal_sign_operator_highlight")
+    unlet python_no_equal_sign_operator_highlight
+  endif
   let python_space_error_highlight = 1
   let python_shebang_header_highlight = 1
   let python_coding_header_highlight = 1
@@ -121,6 +133,19 @@ syn keyword pythonException	except finally raise try
 syn keyword pythonInclude	from import
 if !exists("python_no_self_highlight")
   syn keyword pythonSelf	self cls
+endif
+
+if !exists("python_no_extra_operators_highlight")
+  syn match pythonExtraOperator "\%([~!^&|/%+-]\|\%(class\s*\)\@<!<<\|<=>\|<=\|\%(<\|\<class\s\+\u\w*\s*\)\@<!<[^<]\@=\|===\|==\|=\~\|>>\|>=\|=\@<!>\|\.\.\.\|\.\.\|::\)"
+  syn match pythonExtraPseudoOperator "\%(-=\|/=\|\*\*=\|\*=\|&&=\|&=\|&&\|||=\||=\|||\|%=\|+=\|!\~\|!=\)"
+endif
+
+if !exists("python_no_stars_operators_highlight")
+  syn match pythonExtraOperator "\%(\*\|\*\*\)"
+endif
+
+if !exists("python_no_equal_sign_operator_highlight")
+  syn match pythonExtraOperator "\%(=\)"
 endif
 
 " Decorators (new in Python 2.4)
@@ -319,6 +344,10 @@ if version >= 508 || !exists("did_python_syn_inits")
   HiLink pythonConditional	Conditional
   HiLink pythonRepeat		Repeat
   HiLink pythonOperator		Operator
+  if !exists("python_no_extra_operators_highlight")
+    HiLink pythonExtraOperator		Operator
+    HiLink pythonExtraPseudoOperator	Operator
+  endif
   HiLink pythonException	Exception
   HiLink pythonInclude		Include
   HiLink pythonDecorator	Define
