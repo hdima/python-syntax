@@ -154,7 +154,7 @@ syn keyword pythonStatement     lambda
 syn keyword pythonStatement     with
 syn keyword pythonStatement     def class nextgroup=pythonFunction skipwhite
 syn keyword pythonRepeat        for while
-syn keyword pythonConditional   if elif else
+syn keyword pythonConditional   if elif else else:
 syn keyword pythonImport        import
 syn keyword pythonException     try except finally
 syn keyword pythonOperator      and in is not or
@@ -370,9 +370,9 @@ else
 
   syn match   pythonNumberError	"\<\d\+\D\>" display
   syn match   pythonNumberError	"\<0\d\+\>" display
-  syn match   pythonNumber	"\<\d\>" display
-  syn match   pythonNumber	"\<[1-9]\d\+\>" display
-  syn match   pythonNumber	"\<\d\+[jJ]\>" display
+  syn match   pythonNumber	"\<\d\:\=\>" display
+  syn match   pythonNumber	"\<[1-9]\d\+\:\=\>" display
+  syn match   pythonNumber	"\<\d\+[jJ]\:\=\>" display
 
   syn match   pythonOctError	"\<0[oO]\=\o*[8-9]\d*\>" display
   syn match   pythonBinError	"\<0[bB][01]*[2-9]\d*\>" display

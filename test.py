@@ -57,7 +57,7 @@ RuntimeWarning FutureWarning ImportWarning UnicodeWarning
 # Numbers
 
 0 1 2 9 10 0x1f .3 12.34 0j 0j 34.2E-3 0b10 0o77 1023434 0x0
-
+0:
 # Erroneous numbers
 
 077 100L 0xfffffffL 0L 08 0xk 0x  0b102 0o78 0o123LaB
@@ -130,9 +130,9 @@ $ ? 6xav
 
 # Trailing space errors.
 
-    	
-    break	    
-"""  	
-   	 
-    test    	
-"""  	
+
+    break
+"""
+
+    test
+"""
