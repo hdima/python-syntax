@@ -32,7 +32,9 @@ highlighting modes:
 <
 Options used by the script
 
-  Highlight builtin functions and objects >
+  Highlight punctuation that does not fall into any syntax group >
+    :let python_highlight_default_punctuation
+<  Highlight builtin functions and objects >
     :let python_highlight_builtins = 1
 <  Highlight builtin objects only >
     :let python_highlight_builtin_objs = 1
