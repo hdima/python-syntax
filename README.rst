@@ -95,6 +95,8 @@ highlighting modes:
 Options used by the script
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+``python_highlight_default_punctuation``
+  Highlight punctuation that does not fall into any syntax group
 ``python_highlight_builtins``
   Highlight builtin functions and objects
 ``python_highlight_builtin_objs``

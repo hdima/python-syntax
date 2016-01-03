@@ -66,6 +66,8 @@
 " Option names used by the script
 " -------------------------------
 "
+"    python_highlight_default_punctuation   Highlight punctuation that does not
+"                                           fall into any syntax group
 "    python_highlight_builtins              Highlight builtin functions and
 "                                           objects
 "      python_highlight_builtin_objs        Highlight builtin objects only
@@ -131,6 +133,7 @@ endfunction
 call s:EnableByDefault("g:python_slow_sync")
 
 if s:Enabled("g:python_highlight_all")
+  call s:EnableByDefault("g:python_highlight_default_punctuation")
   call s:EnableByDefault("g:python_highlight_builtins")
   if s:Enabled("g:python_highlight_builtins")
     call s:EnableByDefault("g:python_highlight_builtin_objs")
@@ -144,6 +147,14 @@ if s:Enabled("g:python_highlight_all")
   call s:EnableByDefault("g:python_highlight_space_errors")
   call s:EnableByDefault("g:python_highlight_doctests")
   call s:EnableByDefault("g:python_print_as_function")
+endif
+
+"
+" Default punctuation
+"
+
+if s:Enabled("g:python_highlight_default_punctuation")
+  syn match pythonPunctuation "[^A-Za-z0-9_]"
 endif
 
 "
@@ -494,6 +505,8 @@ if version >= 508 || !exists("did_python_syn_inits")
   else
     command -nargs=+ HiLink hi def link <args>
   endif
+
+  HiLink pythonPunctuation      Special
 
   HiLink pythonStatement        Statement
   HiLink pythonImport           Include
