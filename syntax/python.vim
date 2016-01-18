@@ -190,7 +190,7 @@ endif
 " Decorators (new in Python 2.4)
 "
 
-syn match   pythonDecorator	"\(^\s*\)\@<=@" display nextgroup=pythonDottedName skipwhite
+syn match   pythonDecorator	"^\s*\zs@" display nextgroup=pythonDottedName skipwhite
 if s:Python2Syntax()
   syn match   pythonDottedName "[a-zA-Z_][a-zA-Z0-9_]*\%(\.[a-zA-Z_][a-zA-Z0-9_]*\)*" display contained
 else
