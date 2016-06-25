@@ -173,7 +173,7 @@ if s:Python2Syntax()
   if !s:Enabled("g:python_print_as_function")
     syn keyword pythonStatement  print
   endif
-  syn keyword pythonImport      as
+  syn keyword pythonImport      as self
   syn match   pythonFunction    "[a-zA-Z_][a-zA-Z0-9_]*" display contained
 else
   syn keyword pythonStatement   as nonlocal None
