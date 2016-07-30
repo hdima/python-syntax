@@ -3,9 +3,9 @@
 " Current Maintainer:   Dmitry Vasiliev <dima at hlabs dot org>
 " Previous Maintainer:  Neil Schemenauer <nas at python dot ca>
 " URL:                  https://github.com/hdima/python-syntax
-" Last Change:          2015-11-01
+" Last Change:          2016-07-30
 " Filenames:            *.py
-" Version:              3.6.0
+" Version:              3.6.1
 "
 " Based on python.vim (from Vim 6.1 distribution)
 " by Neil Schemenauer <nas at python dot ca>
@@ -38,6 +38,7 @@
 "   Victor Salgado
 "   Will Gray
 "   Yuri Habrusiev
+"   Arthur Jaron
 "
 " Options
 " =======
@@ -276,7 +277,11 @@ else
   syn region pythonString   start=+"+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end=+$+ keepend contains=pythonBytesEscape,pythonBytesEscapeError,pythonUniEscape,pythonUniEscapeError,@Spell
   syn region pythonString   start=+"""+ end=+"""+ keepend contains=pythonBytesEscape,pythonBytesEscapeError,pythonUniEscape,pythonUniEscapeError,pythonDocTest2,pythonSpaceError,@Spell
   syn region pythonString   start=+'''+ end=+'''+ keepend contains=pythonBytesEscape,pythonBytesEscapeError,pythonUniEscape,pythonUniEscapeError,pythonDocTest,pythonSpaceError,@Spell
+
 endif
+
+syn region pythonDocstring  start=+^\s*[uU]\?[rR]\?"""+ end=+"""+ keepend excludenl contains=pythonEscape,@Spell,pythonDoctest,pythonDocTest2,pythonSpaceError
+syn region pythonDocstring  start=+^\s*[uU]\?[rR]\?'''+ end=+'''+ keepend excludenl contains=pythonEscape,@Spell,pythonDoctest,pythonDocTest2,pythonSpaceError
 
 if s:Python2Syntax()
   " Python 2 Unicode raw strings
@@ -368,6 +373,11 @@ if s:Python2Syntax()
   syn match   pythonNumber	"\<[0-9]\d\+[lL]\=\>" display
   syn match   pythonNumber	"\<\d\+[lLjJ]\>" display
 
+  " For completeness
+  syn match   pythonNumber	"\<-\d[lL]\=\>" display
+  syn match   pythonNumber	"\<-[0-9]\d\+[lL]\=\>" display
+  syn match   pythonNumber	"\<-\d\+[lLjJ]\>" display
+
   syn match   pythonOctError	"\<0[oO]\=\o*[8-9]\d*[lL]\=\>" display
   syn match   pythonBinError	"\<0[bB][01]*[2-9]\d*[lL]\=\>" display
 else
@@ -384,6 +394,11 @@ else
   syn match   pythonNumber	"\<\d\>" display
   syn match   pythonNumber	"\<[1-9]\d\+\>" display
   syn match   pythonNumber	"\<\d\+[jJ]\>" display
+
+  " Negative numbers, why missing?
+  syn match   pythonNumber	"\<-\d\>" display
+  syn match   pythonNumber	"\<-[1-9]\d\+\>" display
+  syn match   pythonNumber	"\<-\d\+[jJ]\>" display
 
   syn match   pythonOctError	"\<0[oO]\=\o*[8-9]\d*\>" display
   syn match   pythonBinError	"\<0[bB][01]*[2-9]\d*\>" display
@@ -402,7 +417,7 @@ if s:Enabled("g:python_highlight_builtin_objs")
     syn keyword pythonBuiltinObj	None
     syn keyword pythonBoolean		True False
   endif
-  syn keyword pythonBuiltinObj	Ellipsis NotImplemented
+  syn keyword pythonBuiltinObj	Ellipsis NotImplemented self
   syn keyword pythonBuiltinObj	__debug__ __doc__ __file__ __name__ __package__
 endif
 
@@ -520,6 +535,8 @@ if version >= 508 || !exists("did_python_syn_inits")
 
   HiLink pythonString           String
   HiLink pythonRawString        String
+
+  HiLink pythonDocstring        Docstring
 
   HiLink pythonUniEscape        Special
   HiLink pythonUniEscapeError   Error
