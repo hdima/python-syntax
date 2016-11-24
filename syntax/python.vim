@@ -210,6 +210,12 @@ endif
 syn keyword pythonTodo		TODO FIXME XXX contained
 
 "
+" Classes
+"
+
+syn match pythonClass       "\(import \)\@<!\<[A-Z][a-zA-Z]*\>" display
+
+"
 " Errors
 "
 
@@ -502,6 +508,7 @@ if version >= 508 || !exists("did_python_syn_inits")
   HiLink pythonRepeat           Repeat
   HiLink pythonException        Exception
   HiLink pythonOperator         Operator
+  HiLink pythonClass            Type
 
   HiLink pythonDecorator        Define
   HiLink pythonDottedName       Function
