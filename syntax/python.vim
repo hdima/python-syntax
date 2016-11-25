@@ -393,7 +393,7 @@ else
 
   syn match   pythonNumberError	"\<\d[_0-9]*\D\>" display
   syn match   pythonNumberError	"\<0[_0-9]\+\>" display
-  syn match   pythonNumberError	"\<\%(_[_0-9]\+\|[_0-9]\+_\)\>" display
+  syn match   pythonNumberError	"\<\d[_0-9]*_\>" display
   syn match   pythonNumber	"\<\d\>" display
   syn match   pythonNumber	"\<[1-9][_0-9]*\d\>" display
   syn match   pythonNumber	"\<\d[jJ]\>" display

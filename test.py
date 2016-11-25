@@ -67,7 +67,7 @@ RuntimeWarning FutureWarning ImportWarning UnicodeWarning
 # Erroneous numbers
 
 077 100L 0xfffffffL 0L 08 0xk 0x 0b102 0o78 0o123LaB
-0_ 0_1 _0 0_x1f 0x1f_ 0_b77 0b77_ ._2 .2_ 1_j
+0_ 0_1 0_x1f 0x1f_ 0_b77 0b77_ .2_ 1_j
 
 # Strings
 
