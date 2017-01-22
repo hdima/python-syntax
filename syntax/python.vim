@@ -255,7 +255,6 @@ syn match pythonBytesEscape       "\\\o\o\=\o\=" display contained
 syn match pythonBytesEscapeError  "\\\o\{,2}[89]" display contained
 syn match pythonBytesEscape       "\\x\x\{2}" display contained
 syn match pythonBytesEscapeError  "\\x\x\=\X" display contained
-syn match pythonBytesEscape       "\\$"
 
 syn match pythonUniEscape         "\\u\x\{4}" display contained
 syn match pythonUniEscapeError    "\\u\x\{,3}\X" display contained
