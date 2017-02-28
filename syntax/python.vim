@@ -477,6 +477,10 @@ if s:Enabled("g:python_highlight_exceptions")
   syn keyword pythonExClass	ImportWarning UnicodeWarning
 endif
 
+syn keyword pythonConvention    self
+syn keyword pythonConvention    cls
+
+
 if s:Enabled("g:python_slow_sync")
   syn sync minlines=2000
 else
@@ -561,6 +565,8 @@ if version >= 508 || !exists("did_python_syn_inits")
   HiLink pythonBuiltinFunc      Function
 
   HiLink pythonExClass          Structure
+
+  HiLink pythonConvention       Define
 
   delcommand HiLink
 endif
