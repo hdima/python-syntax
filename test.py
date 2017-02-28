@@ -52,6 +52,16 @@ UnicodeTranslateError ValueError WindowsError ZeroDivisionError
 Warning UserWarning DeprecationWarning PendingDepricationWarning SyntaxWarning
 RuntimeWarning FutureWarning ImportWarning UnicodeWarning
 
+class Test:
+    @classmethod:
+    def somethind(cls):
+        return 1
+
+    @property
+    def test(self):
+        return 2
+
+
 # Decorators.
 
 @ decoratorname
