@@ -23,19 +23,43 @@ async def Test
 async with
 async for
 
+# Type annotations
+
+def myfunc(a: str, something_other,
+           b: Callable[[str, str], int]) -> Any:
+    myval: float
+    mygood: Optional[int, Any] = b('wow', 'oops')
+    mykey = a
+    wow = {
+        mykey: this_should_not_be_type_anno[Any],
+        'b': some_data,
+    }
+    call_with_dict(a={
+        'a': asdf,
+        'b': 'zxcb',
+        mykey: this_should_not_be_type_anno[Any],
+    }, b=mydata['a'])
+
+
 # Builtin objects.
 
 True False Ellipsis None NotImplemented
 
 # Builtin function and types.
 
-__import__ abs all any apply basestring bool buffer callable chr classmethod
-cmp coerce compile complex delattr dict dir divmod enumerate eval execfile file
-filter float frozenset getattr globals hasattr hash help hex id input int
-intern isinstance issubclass iter len list locals long map max min object oct
-open ord pow property range raw_input reduce reload repr reversed round set
-setattr slice sorted staticmethod str sum super tuple type unichr unicode vars
-xrange zip
+__import__() abs() all() any() apply() basestring() bool() buffer() callable() chr() classmethod()
+cmp() coerce() compile() complex() delattr() dict() dir() divmod() enumerate() eval() execfile() file()
+filter() float() frozenset() getattr() globals() hasattr() hash() help() hex() id() input() int()
+intern() isinstance() issubclass() iter() len() list() locals() long() map() max() min() object() oct()
+open() ord() pow() property() range() raw_input() reduce() reload() repr() reversed() round() set()
+setattr() slice() sorted() staticmethod() str() sum() super() tuple() type() unichr() unicode() vars()
+xrange() zip()
+
+when_we_dont_call = a.float
+float = when_we_dont_call
+
+when_we_call = float(x)
+when_we_call = min(a, b)
 
 # Builtin exceptions and warnings.
 
