@@ -631,6 +631,9 @@ if version >= 508 || !exists("did_python_syn_inits")
   HiLink pythonType             Special
 
   delcommand HiLink
+
+  " default style for custom highlight group (may be overriden in colors)
+  hi Optional gui=italic cterm=italic
 endif
 
 let b:current_syntax = "python"
