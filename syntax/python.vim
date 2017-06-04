@@ -154,7 +154,6 @@ syn keyword pythonStatement     break continue del
 syn keyword pythonStatement     exec return
 syn keyword pythonStatement     pass raise
 syn keyword pythonStatement     global assert
-syn keyword pythonStatement     lambda
 syn keyword pythonStatement     with
 syn keyword pythonStatement     def class nextgroup=pythonFunction skipwhite
 syn keyword pythonRepeat        for while
@@ -166,12 +165,15 @@ syn keyword pythonImport        import
 syn match   pythonIdentifier    "\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*" nextgroup=pythonFuncArgs,pythonTypeAnno display
 syn keyword pythonException     try except finally
 syn keyword pythonOperator      and in is not or
+syn match pythonLambdaExpr   "\<lambda[^:]*:"he=s+6 display nextgroup=@pythonExpression
+"syn keyword pythonStatement     lambda
 
 syn region pythonDictSetExpr matchgroup=pythonDictSetExpr start='{' end='}' contains=@pythonExpression
+syn region pythonListSliceExpr matchgroup=pythonListSliceExpr start='\[' end='\]' contains=@pythonExpression
 syn region pythonFuncArgs    matchgroup=pythonFuncArgs    start='(' end=')' contained contains=pythonTypeAnno,@pythonExpression
 
 syn match pythonTypeAnno ":\s*\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*"hs=s+1 display contained contains=pythonType nextgroup=pythonTypeArgs
-syn match pythonTypeAnnoReturn "->\s*\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*"hs=s+2,he=e-1 display contains=pythonType nextgroup=pythonTypeArgs
+syn match pythonTypeAnnoReturn "->\s*\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*" display contains=pythonType nextgroup=pythonTypeArgs
 syn region pythonTypeArgs matchgroup=pythonTypeArgs start='\[' end='\]' display contained contains=pythonType,pythonTypeArgs
 syn keyword pythonType Any AnyStr Callable ClassVar Tuple Union Optional Type TypeVar None contained
 syn keyword pythonType AbstractSet MutableSet Mapping MutableMapping Sequence MutableSequence ByteString Deque List contained
@@ -203,6 +205,8 @@ endif
 syn cluster pythonExpression contains=
             \ pythonFuncArgs,
             \ pythonDictSetExpr,
+            \ pythonListSliceExpr,
+            \ pythonLambdaExpr,
             \ pythonStatement,
             \ pythonRepeat,
             \ pythonConditional,
@@ -225,6 +229,9 @@ syn cluster pythonExpression contains=
 
 syn cluster pythonFExpression contains=
             \ pythonStatement,
+            \ pythonDictSetExpr,
+            \ pythonListSliceExpr,
+            \ pythonLambdaExpr,
             \ pythonRepeat,
             \ pythonConditional,
             \ pythonOperator,
@@ -559,6 +566,7 @@ if version >= 508 || !exists("did_python_syn_inits")
   endif
 
   HiLink pythonStatement        Statement
+  HiLink pythonLambdaExpr       Statement
   HiLink pythonImport           Include
   HiLink pythonFunction         Function
   HiLink pythonConditional      Conditional

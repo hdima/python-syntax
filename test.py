@@ -8,8 +8,11 @@
 
 # Keywords.
 
-with break continue del exec return pass print raise global assert lambda yield
+with break continue del exec return pass print raise global assert yield
 for while if elif else import from as try except finally and in is not or
+
+lambda: a + 1
+lambda x, y: x + y
 
 yield from
 
@@ -29,6 +32,7 @@ def myfunc(a: str, something_other,
            b: Callable[[str, str], int]) -> Any:
     myval: float
     mygood: Optional[int, Any] = b('wow', 'oops')
+    myarr: Sequence[int] = origarr[aa:bb]
     mykey = a
     wow = {
         mykey: this_should_not_be_type_anno[Any],
@@ -39,6 +43,9 @@ def myfunc(a: str, something_other,
         'b': 'zxcb',
         mykey: this_should_not_be_type_anno[Any],
     }, b=mydata['a'])
+    vanilla_lambda = lambda x, y: myval + 1.0
+    call_with_lambda(lambda x, y: myval + 1.0)
+    call_with_slice(mydata[range_start:range_end])
 
 
 # Builtin objects.
