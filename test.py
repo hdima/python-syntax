@@ -32,7 +32,7 @@ def myfunc(a: str, something_other,
            b: Callable[[str, str], int]) -> Any:
     myval: float
     mygood: Optional[int, Any] = b('wow', 'oops')
-    myarr: Sequence[int] = origarr[aa:bb]
+    myarr: Sequence[int] = origarr[aa:bb] + (lambda: x)()
     mykey = a
     wow = {
         mykey: this_should_not_be_type_anno[Any],
