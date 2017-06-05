@@ -29,7 +29,7 @@ async for
 # Type annotations
 
 def myfunc(a: str, something_other,
-           b: Callable[[str, str], int]) -> Any:
+           b: Callable[[str, str], int]) -> 'runtime_resolved_type':
     myval: float
     mygood: Optional[int, Any] = b('wow', 'oops')
     myarr: Sequence[int] = origarr[aa:bb] + (lambda: x)()

@@ -174,9 +174,9 @@ syn region pythonFuncArgs    matchgroup=pythonFuncArgs    start='(' end=')' cont
 
 if !s:Python2Syntax()
   if s:Enabled("g:python_highlight_type_annotations")
-    syn match pythonTypeAnno ":\s*\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*"hs=s+1 display contained contains=pythonType nextgroup=pythonTypeArgs
-    syn match pythonTypeAnnoReturn "->\s*\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*" display contains=pythonType nextgroup=pythonTypeArgs
-    syn region pythonTypeArgs matchgroup=pythonTypeArgs start='\[' end='\]' display contained contains=pythonType,pythonTypeArgs
+    syn match pythonTypeAnno @:\s*['"]\?\([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\([^[:cntrl:][:punct:][:space:]]\|_\)*['"]\?@hs=s+1 display contained contains=pythonType,pythonString nextgroup=pythonTypeArgs
+    syn match pythonTypeAnnoReturn @->\s*['"]\?\([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\([^[:cntrl:][:punct:][:space:]]\|_\)*['"]\?@ display contains=pythonType,pythonString nextgroup=pythonTypeArgs
+    syn region pythonTypeArgs matchgroup=pythonTypeArgs start='\[' end='\]' display contained contains=pythonType,pythonString,pythonTypeArgs
     syn keyword pythonType Any AnyStr Callable ClassVar Tuple Union Optional Type TypeVar None contained
     syn keyword pythonType AbstractSet MutableSet Mapping MutableMapping Sequence MutableSequence ByteString Deque List contained
     syn keyword pythonType Set FrozenSet MappingView KeysView ItemsView ValuesView Awaitable Coroutine AsyncIterable contained
