@@ -136,6 +136,7 @@ if s:Enabled("g:python_highlight_all")
     call s:EnableByDefault("g:python_highlight_builtin_objs")
     call s:EnableByDefault("g:python_highlight_builtin_funcs")
   endif
+  call s:EnableByDefault("g:python_highlight_type_annotations")
   call s:EnableByDefault("g:python_highlight_exceptions")
   call s:EnableByDefault("g:python_highlight_string_formatting")
   call s:EnableByDefault("g:python_highlight_string_format")
@@ -171,15 +172,19 @@ syn region pythonDictSetExpr matchgroup=pythonDictSetExpr start='{' end='}' cont
 syn region pythonListSliceExpr matchgroup=pythonListSliceExpr start='\[' end='\]' contains=@pythonExpression
 syn region pythonFuncArgs    matchgroup=pythonFuncArgs    start='(' end=')' contained contains=pythonTypeAnno,@pythonExpression
 
-syn match pythonTypeAnno ":\s*\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*"hs=s+1 display contained contains=pythonType nextgroup=pythonTypeArgs
-syn match pythonTypeAnnoReturn "->\s*\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*" display contains=pythonType nextgroup=pythonTypeArgs
-syn region pythonTypeArgs matchgroup=pythonTypeArgs start='\[' end='\]' display contained contains=pythonType,pythonTypeArgs
-syn keyword pythonType Any AnyStr Callable ClassVar Tuple Union Optional Type TypeVar None contained
-syn keyword pythonType AbstractSet MutableSet Mapping MutableMapping Sequence MutableSequence ByteString Deque List contained
-syn keyword pythonType Set FrozenSet MappingView KeysView ItemsView ValuesView Awaitable Coroutine AsyncIterable contained
-syn keyword pythonType AsyncIterator ContextManager Dict DefaultDict Generator AsyncGenerator Text NamedTuple contained
-syn keyword pythonType Iterable Iterator Reversible SupportsInt SupportsFloat SupportsAbs SupportsRound Container contained
-syn keyword pythonType Hashable Sized Collection contained
+if !s:Python2Syntax()
+  if s:Enabled("g:python_highlight_type_annotations")
+    syn match pythonTypeAnno ":\s*\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*"hs=s+1 display contained contains=pythonType nextgroup=pythonTypeArgs
+    syn match pythonTypeAnnoReturn "->\s*\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*" display contains=pythonType nextgroup=pythonTypeArgs
+    syn region pythonTypeArgs matchgroup=pythonTypeArgs start='\[' end='\]' display contained contains=pythonType,pythonTypeArgs
+    syn keyword pythonType Any AnyStr Callable ClassVar Tuple Union Optional Type TypeVar None contained
+    syn keyword pythonType AbstractSet MutableSet Mapping MutableMapping Sequence MutableSequence ByteString Deque List contained
+    syn keyword pythonType Set FrozenSet MappingView KeysView ItemsView ValuesView Awaitable Coroutine AsyncIterable contained
+    syn keyword pythonType AsyncIterator ContextManager Dict DefaultDict Generator AsyncGenerator Text NamedTuple contained
+    syn keyword pythonType Iterable Iterator Reversible SupportsInt SupportsFloat SupportsAbs SupportsRound Container contained
+    syn keyword pythonType Hashable Sized Collection contained
+  endif
+endif
 
 syn match pythonStatement   "\<yield\>" display
 syn match pythonImport      "\<from\>" display
