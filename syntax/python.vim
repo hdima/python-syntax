@@ -152,7 +152,10 @@ endif
 "
 
 syn keyword pythonStatement     break continue del
-syn keyword pythonStatement     exec return
+if s:Python2Syntax()
+  syn keyword pythonStatement     exec
+endif
+syn keyword pythonStatement     return
 syn keyword pythonStatement     pass raise
 syn keyword pythonStatement     global assert
 syn keyword pythonStatement     with
