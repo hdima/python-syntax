@@ -493,7 +493,7 @@ if s:Enabled("g:python_highlight_builtin_funcs")
       syn match pythonBuiltinFunc       '\v(\.)@<!\zs<(print)>\ze\(' nextgroup=pythonFuncArgs
     endif
   else
-    syn match pythonBuiltinFunc '\v(\.)@<!\zs<(ascii|exec|memoryview|print)\ze\(>' nextgroup=pythonFuncArgs
+    syn match pythonBuiltinFunc '\v(\.)@<!\zs<(ascii|exec|memoryview|print)\ze\(' nextgroup=pythonFuncArgs
   endif
   syn match pythonBuiltinFunc   '\v(\.)@<!\zs<(__import__|abs|all|any)>\ze\(' nextgroup=pythonFuncArgs
   syn match pythonBuiltinFunc   '\v(\.)@<!\zs<(bin|bool|bytearray|bytes)>\ze\(' nextgroup=pythonFuncArgs
