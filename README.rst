@@ -24,7 +24,8 @@ Features
 
 Changes from the original ``python.vim`` are:
 
-- Added support for Python 3 syntax highlighting
+- Added support for Python 3.5/3.6+ syntax highlighting, including f-string
+  literals and type annotations.
 - Added ``:Python2Syntax`` and ``:Python3Syntax`` commands which allow to
   switch between Python 2 and Python 3 syntaxes respectively without
   reloads/restarts
@@ -101,6 +102,8 @@ Options used by the script
   Highlight builtin objects only
 ``python_highlight_builtin_funcs``
   Highlight builtin functions only
+``python_highlight_type_annotations``
+  Highlight Python 3.5+ type annotations
 ``python_highlight_exceptions``
   Highlight standard exceptions
 ``python_highlight_string_formatting``
