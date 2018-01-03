@@ -173,11 +173,12 @@ syn match pythonLambdaExpr   "\<lambda[^:]*:"he=s+6 contains=@pythonExpression n
 
 syn region pythonDictSetExpr matchgroup=pythonDictSetExpr start='{' end='}' contains=@pythonExpression
 syn region pythonListSliceExpr matchgroup=pythonListSliceExpr start='\[' end='\]' contains=@pythonExpression
-syn region pythonFuncArgs    matchgroup=pythonFuncArgs    start='(' end=')' contained contains=pythonTypeAnno,@pythonExpression
+syn region pythonFuncArgs    matchgroup=pythonFuncArgs    start='(' end=')' contained contains=@pythonTypeExpression,@pythonExpression
 
 if !s:Python2Syntax()
   if s:Enabled("g:python_highlight_type_annotations")
-    syn match pythonTypeAnno @:\s*['"]\?\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*\%(\.\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*\)*['"]\?@hs=s+1 display contained contains=pythonType,pythonString nextgroup=pythonTypeArgs
+    syn match pythonTypeAnno @:\s*['"]\?\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*\%(\.\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*\)*['"]\?@hs=s+1 display contained contains=pythonType,pythonString nextgroup=pythonTypeUnion,pythonTypeArgs
+    syn match pythonTypeUnion @\s*|\s*['"]\?\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*\%(\.\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*\)*['"]\?@ display contained contains=pythonType,pythonString nextgroup=pythonTypeUnion
     syn match pythonTypeAnnoReturn @->\s*['"]\?\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*\%(\.\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*\)*['"]\?@ display contains=pythonType,pythonString nextgroup=pythonTypeArgs
     syn region pythonTypeArgs matchgroup=pythonTypeArgs start='\[' end='\]' display contained contains=pythonType,pythonString,pythonTypeArgs
     syn keyword pythonType Any AnyStr Callable ClassVar Tuple Union Optional Type TypeVar None contained
@@ -208,6 +209,8 @@ else
   syn match   pythonStatement   "\<async\s\+with\>" display
   syn match   pythonStatement   "\<async\s\+for\>" display
 endif
+
+syn cluster pythonTypeExpression contains=pythonTypeAnno,pythonTypeUnion,pythonTypeArgs
 
 syn cluster pythonExpression contains=
             \ pythonFuncArgs,
@@ -641,6 +644,7 @@ if version >= 508 || !exists("did_python_syn_inits")
   HiLink pythonExClass          Structure
 
   HiLink pythonTypeAnno         Optional
+  HiLink pythonTypeUnion        Optional
   HiLink pythonTypeAnnoReturn   Optional
   HiLink pythonTypeArgs         Optional
   HiLink pythonType             Special
