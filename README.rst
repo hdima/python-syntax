@@ -128,7 +128,7 @@ Options used by the script
 Contributors
 ------------
 
-List of the contributors in alphabetical order:
+List of all the contributors in alphabetical order:
 
 - `Andrea Riciputi <https://github.com/mrrech>`_
 - Anton Butanaev
