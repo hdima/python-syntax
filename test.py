@@ -23,6 +23,12 @@ async def Test
 async with
 async for
 
+match "something":
+    case "foo":
+        True
+    case "bar":
+        False
+
 # Builtin objects.
 
 True False Ellipsis None NotImplemented

@@ -3,9 +3,9 @@
 " Current Maintainer:   Dmitry Vasiliev <dima at hlabs dot org>
 " Previous Maintainer:  Neil Schemenauer <nas at python dot ca>
 " URL:                  https://github.com/hdima/python-syntax
-" Last Change:          2015-11-01
+" Last Change:          2021-12-03
 " Filenames:            *.py
-" Version:              3.6.0
+" Version:              3.10.0
 "
 " Based on python.vim (from Vim 6.1 distribution)
 " by Neil Schemenauer <nas at python dot ca>
@@ -157,6 +157,8 @@ syn keyword pythonStatement     global assert
 syn keyword pythonStatement     lambda
 syn keyword pythonStatement     with
 syn keyword pythonStatement     def class nextgroup=pythonFunction skipwhite
+syn keyword pythonStatement     match
+syn keyword pythonStatement     case
 syn keyword pythonRepeat        for while
 syn keyword pythonConditional   if elif else
 " The standard pyrex.vim unconditionally removes the pythonInclude group, so
