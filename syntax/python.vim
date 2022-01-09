@@ -31,6 +31,7 @@
 "   Elizabeth Myers
 "   Ihor Gorobets
 "   Jeroen Ruigrok van der Werven
+"   Joaquin Bogado
 "   John Eikenberry
 "   Joongi Kim
 "   Marc Weber
@@ -159,6 +160,7 @@ syn keyword pythonStatement     with
 syn keyword pythonStatement     def class nextgroup=pythonFunction skipwhite
 syn keyword pythonRepeat        for while
 syn keyword pythonConditional   if elif else
+syn keyword pythonConditional   match case
 " The standard pyrex.vim unconditionally removes the pythonInclude group, so
 " we provide a dummy group here to avoid crashing pyrex.vim.
 syn keyword pythonInclude       import
